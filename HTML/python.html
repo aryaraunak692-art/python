@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn Python Basics</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #0f172a;
+            color: #e5e7eb;
+            line-height: 1.6;
+        }
+
+        header {
+            background: #1e293b;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: #38bdf8;
+        }
+
+        nav {
+            background: #020617;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        nav a {
+            color: #e5e7eb;
+            text-decoration: none;
+            margin: 5px 15px;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        section {
+            background: #020617;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        section h2 {
+            color: #38bdf8;
+            border-bottom: 2px solid #38bdf8;
+            padding-bottom: 5px;
+        }
+
+        code,
+        pre {
+            background: #0f172a;
+            color: #38bdf8;
+            padding: 10px;
+            border-radius: 8px;
+            display: block;
+            overflow-x: auto;
+        }
+
+        .example {
+            margin-top: 10px;
+            padding: 15px;
+            background: #020617;
+            border-left: 4px solid #38bdf8;
+        }
+
+        footer {
+            background: #020617;
+            text-align: center;
+            padding: 15px;
+            color: #94a3b8;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #38bdf8;
+            color: #020617;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #0ea5e9;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Learn Python Basics</h1>
+        <p>Beginner-friendly Python tutorial website</p>
+    </header>
+
+    <nav>
+        <a href="#intro">Introduction</a>
+        <a href="#variables">Variables</a>
+        <a href="#datatypes">Data Types</a>
+        <a href="#operators">Operators</a>
+        <a href="#conditions">Conditions</a>
+        <a href="#loops">Loops</a>
+        <a href="#functions">Functions</a>
+        <a href="#inputoutput">Input & Output</a>
+    </nav>
+
+    <div class="container">
+
+        <section id="intro">
+            <h2>📌 Introduction to Python</h2>
+            <p>Python is a high-level, easy-to-learn programming language used in web development, data science, AI,
+                automation, and more.</p>
+            <div class="example">
+                <strong>Your first Python program:</strong>
+                <pre><code>print("Hello, World!")</code></pre>
+            </div>
+        </section>
+
+        <section id="variables">
+            <h2>📌 Variables</h2>
+            <p>Variables store data values.</p>
+            <pre><code>x = 10
+name = "Arya"
+price = 99.99</code></pre>
+        </section>
+
+        <section id="datatypes">
+            <h2>📌 Data Types</h2>
+            <ul>
+                <li><strong>int</strong> → Whole numbers</li>
+                <li><strong>float</strong> → Decimal numbers</li>
+                <li><strong>str</strong> → Text</li>
+                <li><strong>bool</strong> → True/False</li>
+            </ul>
+            <pre><code>a = 5        # int
+b = 3.14     # float
+c = "Hello"  # str
+d = True     # bool</code></pre>
+        </section>
+
+        <section id="operators">
+            <h2>📌 Operators</h2>
+            <p>Operators perform operations on variables.</p>
+            <pre><code>a = 10
+b = 3
+
+print(a + b)   # Addition
+print(a - b)   # Subtraction
+print(a * b)   # Multiplication
+print(a / b)   # Division
+print(a % b)   # Modulus</code></pre>
+        </section>
+
+        <section id="conditions">
+            <h2>📌 Conditional Statements (if-else)</h2>
+            <pre><code>age = 18
+
+if age >= 18:
+    print("You are eligible to vote.")
+else:
+    print("You are not eligible to vote.")</code></pre>
+        </section>
+
+        <section id="loops">
+            <h2>📌 Loops</h2>
+            <h3>For Loop</h3>
+            <pre><code>for i in range(5):
+    print(i)</code></pre>
+
+            <h3>While Loop</h3>
+            <pre><code>count = 1
+while count <= 5:
+    print(count)
+    count += 1</code></pre>
+        </section>
+
+        <section id="functions">
+            <h2>📌 Functions</h2>
+            <p>Functions are reusable blocks of code.</p>
+            <pre><code>def greet(name):
+    print("Hello", name)
+
+
+greet("Arya")</code></pre>
+        </section>
+
+        <section id="inputoutput">
+            <h2>📌 Input & Output</h2>
+            <pre><code>name = input("Enter your name: ")
+print("Welcome", name)</code></pre>
+        </section>
+
+        <section>
+            <h2>🎯 Next Steps</h2>
+            <p>After learning these basics, you can explore:</p>
+            <ul>
+                <li>Lists, Tuples, Sets, Dictionaries</li>
+                <li>File Handling</li>
+                <li>Object-Oriented Programming</li>
+                <li>Projects like Calculator, Quiz App, Games</li>
+            </ul>
+            <a href="#intro" class="btn">Start Again</a>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Learn Python Basics | Powered by CodeSpark Academy</p>
+    </footer>
+
+</body>
+
+</html>

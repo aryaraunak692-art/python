@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Python: Interactive Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 400px;
+        }
+
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+
+        .code-font {
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .active-tab {
+            border-bottom: 2px solid #2563EB;
+            color: #1E3A8A;
+            font-weight: 600;
+        }
+
+        .inactive-tab {
+            color: #6B7280;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutral Foundation (Stone-50) with Professional Tech Accents (Blue-600, Amber-500) mimicking Python colors but muted for a modern, calm "learning" aesthetic. -->
+
+    <!-- Application Structure Plan: The app is designed as a "Linear Learning Journey" with four distinct phases: 
+         1. Discovery (What & Why): Uses visual comparison (Chart.js) to prove Python's simplicity.
+         2. Real-World Impact (Who & Where): Uses an interactive grid to reveal how major companies use Python, grounding abstract concepts in reality.
+         3. The Lab (Syntax & Logic): A simulated "IDE" experience. Instead of static slides, users toggle between "Hello World", "Variables", and "Logic" tabs. A "Run" button and interactive inputs (like a slider for the battery logic) allow active experimentation with the concepts.
+         4. Foundation (Data Types): A clickable explorer for data types, replacing bullet points with interactive definition cards.
+         This structure transforms passive reading into active exploration, critical for a beginner programming topic. -->
+
+    <!-- Visualization & Content Choices:
+         1. "Simplicity Comparison" (Bar Chart): Transforms the "10 lines vs 1 line" text into a visual impact chart. Goal: Prove efficiency. Lib: Chart.js.
+         2. "Industry Grid": Transforms the list of companies (Netflix, NASA, etc.) into clickable cards that reveal their specific Python use-case. Goal: Contextualize utility. Method: HTML/JS Grid.
+         3. "Simulated Console": Transforms code snippets into an interactive element where users click "Run" to see output. Includes a slider for the 'If/Else' battery example to dynamically change the outcome. Goal: Teach cause-effect in coding. Method: JS DOM Manipulation.
+         4. "Data Type Chips": Transforms the list of types into a selector. clicking a type updates the example panel. Goal: Categorize information clearly. Method: JS State.
+         -->
+
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+
+<body class="bg-stone-50 text-stone-800 antialiased selection:bg-blue-100 selection:text-blue-800">
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-stone-50/90 backdrop-blur-md border-b border-stone-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl">🐍</span>
+                    <span class="font-bold text-xl tracking-tight text-stone-900">Python<span
+                            class="text-blue-600">Start</span></span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-medium">
+                    <button onclick="scrollToSection('hero')"
+                        class="hover:text-blue-600 transition-colors">Start</button>
+                    <button onclick="scrollToSection('why-python')" class="hover:text-blue-600 transition-colors">Why
+                        Python?</button>
+                    <button onclick="scrollToSection('impact')"
+                        class="hover:text-blue-600 transition-colors">Impact</button>
+                    <button onclick="scrollToSection('the-lab')" class="hover:text-blue-600 transition-colors">The
+                        Lab</button>
+                    <button onclick="scrollToSection('next-steps')" class="hover:text-blue-600 transition-colors">Next
+                        Steps</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="pt-20 pb-16 px-4 sm:px-6 lg:px-8 text-center max-w-4xl mx-auto">
+        <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-stone-900 mb-6">
+            Unlock the Power of <span class="text-blue-600">Python</span>
+        </h1>
+        <p class="text-xl text-stone-600 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Your journey starts here. Discover the world's most popular programming language—simple enough for
+            beginners, powerful enough for NASA.
+        </p>
+        <div class="flex justify-center gap-4">
+            <button onclick="scrollToSection('why-python')"
+                class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition shadow-lg shadow-blue-200">
+                <a href="python.html">
+                    START LEARNING
+                </a>
+            </button>
+            <button onclick="scrollToSection('the-lab')"
+                class="bg-white text-stone-700 border border-stone-300 px-8 py-3 rounded-lg font-semibold hover:bg-stone-50 transition">
+                <a href="compiler.htm">
+                    Try Code IN CODE SPARK COMPILER
+                </a>
+            </button>
+        </div>
+    </section>
+
+    <!-- Section 1: What & Why (Discovery) -->
+    <section id="why-python" class="py-16 bg-white border-y border-stone-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+
+                <!-- Content Column -->
+                <div>
+                    <h2 class="text-3xl font-bold text-stone-900 mb-4">Speaking the Computer's Language</h2>
+                    <p class="text-stone-600 mb-6 text-lg leading-relaxed">
+                        Python is a high-level programming language that reads very close to English. It acts as a
+                        translator, turning your simple commands into complex zeros and ones the computer understands.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="bg-stone-50 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h3 class="font-semibold text-stone-900">Why Choose Python?</h3>
+                            <ul class="mt-2 space-y-2 text-stone-600 text-sm">
+                                <li class="flex items-start"><span class="mr-2">✅</span> <strong>Readability:</strong>
+                                    No complex symbols or messy brackets.</li>
+                                <li class="flex items-start"><span class="mr-2">🚀</span> <strong>Popularity:</strong>
+                                    #1 language for data science & beginners.</li>
+                                <li class="flex items-start"><span class="mr-2">🤝</span> <strong>Community:</strong>
+                                    Millions of developers to help you.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visualization Column -->
+                <div class="bg-stone-50 p-6 rounded-xl shadow-sm border border-stone-100">
+                    <h3 class="text-lg font-semibold text-center mb-2">The "Superpower" of Simplicity</h3>
+                    <p class="text-xs text-center text-stone-500 mb-4">Lines of code required for basic tasks
+                        (Conceptual)</p>
+
+                    <!-- Chart Container -->
+                    <div class="chart-container">
+                        <canvas id="verbosityChart"></canvas>
+                    </div>
+                    <div class="mt-4 text-center">
+                        <p
+                            class="text-sm text-stone-600 bg-white inline-block px-4 py-2 rounded shadow-sm border border-stone-100">
+                            Python helps you focus on <strong>solving problems</strong>, not fighting syntax.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 2: Real World Impact -->
+    <section id="impact" class="py-16 bg-stone-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-stone-900">Who Uses Python?</h2>
+                <p class="mt-4 text-stone-600 max-w-2xl mx-auto">
+                    From streaming your favorite music to exploring Mars, Python is the engine behind the apps you use
+                    every day. Click the cards below to see how.
+                </p>
+            </div>
+
+            <!-- Interactive Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="companyGrid">
+                <!-- Cards injected via JS -->
+            </div>
+
+            <div class="mt-16 bg-white p-8 rounded-xl shadow-sm border border-stone-200">
+                <h3 class="text-xl font-bold mb-6 text-center">Infinite Possibilities: What Can You Build?</h3>
+                <div class="grid md:grid-cols-4 gap-8 text-center">
+                    <div class="p-4 hover:bg-stone-50 rounded-lg transition">
+                        <div class="text-4xl mb-3">🌐</div>
+                        <h4 class="font-semibold text-stone-900">Web Development</h4>
+                        <p class="text-xs text-stone-500 mt-2">Building servers with Django & Flask</p>
+                    </div>
+                    <div class="p-4 hover:bg-stone-50 rounded-lg transition">
+                        <div class="text-4xl mb-3">🤖</div>
+                        <h4 class="font-semibold text-stone-900">Data Science & AI</h4>
+                        <p class="text-xs text-stone-500 mt-2">Teaching computers to learn</p>
+                    </div>
+                    <div class="p-4 hover:bg-stone-50 rounded-lg transition">
+                        <div class="text-4xl mb-3">⚙️</div>
+                        <h4 class="font-semibold text-stone-900">Automation</h4>
+                        <p class="text-xs text-stone-500 mt-2">Scripting boring tasks away</p>
+                    </div>
+                    <div class="p-4 hover:bg-stone-50 rounded-lg transition">
+                        <div class="text-4xl mb-3">🎮</div>
+                        <h4 class="font-semibold text-stone-900">Game Dev</h4>
+                        <p class="text-xs text-stone-500 mt-2">Creating simple games with PyGame</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: The Lab (Interactive Code) -->
+    <section id="the-lab" class="py-16 bg-stone-900 text-stone-100">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-10 text-center">
+                <h2 class="text-3xl font-bold text-white">The Interactive Lab</h2>
+                <p class="mt-4 text-stone-400">
+                    The only way to learn is to do. Switch between the tabs to explore basic concepts, modify the
+                    values, and see Python in action.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Controls / Tabs -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="bg-stone-800 rounded-xl p-2 border border-stone-700 flex flex-col gap-1">
+                        <button onclick="setLabTab('hello')" id="tab-hello"
+                            class="text-left px-4 py-3 rounded-lg hover:bg-stone-700 transition active-tab">
+                            <span class="block font-bold">1. First Program</span>
+                            <span class="text-xs text-stone-400">The classic "Hello, World!"</span>
+                        </button>
+                        <button onclick="setLabTab('variables')" id="tab-variables"
+                            class="text-left px-4 py-3 rounded-lg hover:bg-stone-700 transition inactive-tab">
+                            <span class="block font-bold">2. Variables</span>
+                            <span class="text-xs text-stone-400">Storing data in "boxes"</span>
+                        </button>
+                        <button onclick="setLabTab('logic')" id="tab-logic"
+                            class="text-left px-4 py-3 rounded-lg hover:bg-stone-700 transition inactive-tab">
+                            <span class="block font-bold">3. Simple Logic</span>
+                            <span class="text-xs text-stone-400">If/Else decision making</span>
+                        </button>
+                        <button onclick="setLabTab('types')" id="tab-types"
+                            class="text-left px-4 py-3 rounded-lg hover:bg-stone-700 transition inactive-tab">
+                            <span class="block font-bold">4. Data Types</span>
+                            <span class="text-xs text-stone-400">Strings, Integers, Floats</span>
+                        </button>
+                    </div>
+
+                    <div id="lab-explanation"
+                        class="bg-blue-900/30 border border-blue-800 p-5 rounded-xl text-sm leading-relaxed text-blue-100">
+                        <!-- Dynamic explanation loaded here -->
+                    </div>
+                </div>
+
+                <!-- Simulator -->
+                <div
+                    class="lg:col-span-2 bg-stone-950 rounded-xl border border-stone-800 shadow-2xl overflow-hidden flex flex-col">
+                    <!-- Fake Window Header -->
+                    <div class="bg-stone-800 px-4 py-2 flex items-center gap-2 border-b border-stone-700">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        <span class="ml-2 text-xs text-stone-400 font-mono">main.py</span>
+                    </div>
+
+                    <!-- Code Area -->
+                    <div class="p-6 font-mono text-sm sm:text-base flex-grow relative min-h-[250px]">
+                        <div id="code-display" class="whitespace-pre-wrap text-stone-300"></div>
+
+                        <!-- Interactive Logic Slider (Hidden by default) -->
+                        <div id="logic-controls" class="hidden mt-6 pt-6 border-t border-stone-800">
+                            <label class="block text-xs uppercase tracking-wider text-stone-500 mb-2">Battery Level
+                                Simulator</label>
+                            <input type="range" id="battery-slider" min="0" max="100" value="10"
+                                class="w-full h-2 bg-stone-700 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-xs text-stone-500 mt-1">
+                                <span>0%</span>
+                                <span id="battery-val" class="text-white font-bold">10%</span>
+                                <span>100%</span>
+                            </div>
+                        </div>
+
+                        <!-- Data Type Explorer (Hidden by default) -->
+                        <div id="type-explorer" class="hidden h-full">
+                            <div class="grid grid-cols-2 gap-4 h-full content-start">
+                                <button onclick="showTypeDetails('str')"
+                                    class="bg-stone-800 p-3 rounded border border-stone-700 hover:border-blue-500 text-left transition">
+                                    <div class="text-blue-400 font-bold mb-1">String (str)</div>
+                                    <div class="text-xs text-stone-400">Text in quotes</div>
+                                </button>
+                                <button onclick="showTypeDetails('int')"
+                                    class="bg-stone-800 p-3 rounded border border-stone-700 hover:border-blue-500 text-left transition">
+                                    <div class="text-green-400 font-bold mb-1">Integer (int)</div>
+                                    <div class="text-xs text-stone-400">Whole numbers</div>
+                                </button>
+                                <button onclick="showTypeDetails('float')"
+                                    class="bg-stone-800 p-3 rounded border border-stone-700 hover:border-blue-500 text-left transition">
+                                    <div class="text-purple-400 font-bold mb-1">Float</div>
+                                    <div class="text-xs text-stone-400">Decimal numbers</div>
+                                </button>
+                                <button onclick="showTypeDetails('bool')"
+                                    class="bg-stone-800 p-3 rounded border border-stone-700 hover:border-blue-500 text-left transition">
+                                    <div class="text-amber-400 font-bold mb-1">Boolean (bool)</div>
+                                    <div class="text-xs text-stone-400">True / False</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output Console -->
+                    <div class="bg-stone-900 border-t border-stone-800 p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-xs uppercase tracking-wider text-stone-500 font-semibold">Terminal
+                                Output</span>
+                            <button id="run-btn" onclick="runCode()"
+                                class="bg-green-600 hover:bg-green-700 text-white text-xs px-4 py-1.5 rounded font-medium transition flex items-center gap-2">
+                                <span>▶</span> Run Code
+                            </button>
+                        </div>
+                        <div id="console-output" class="font-mono text-sm text-green-400 min-h-[3rem]">
+                            > Waiting for input...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Next Steps -->
+    <section id="next-steps" class="py-16 bg-white border-t border-stone-200">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-stone-900 mb-8">Your Journey Begins Now</h2>
+
+            <div class="grid md:grid-cols-3 gap-6 text-left">
+                <div class="p-6 rounded-xl bg-stone-50 border border-stone-200">
+                    <div class="text-2xl mb-3">⬇️</div>
+                    <h3 class="font-bold text-stone-900 mb-2">1. Download</h3>
+                    <p class="text-sm text-stone-600">Install Python locally from <a href="#"
+                            class="text-blue-600 hover:underline">python.org</a> and setup VS Code.</p>
+                </div>
+                <div class="p-6 rounded-xl bg-stone-50 border border-stone-200">
+                    <div class="text-2xl mb-3">⌨️</div>
+                    <h3 class="font-bold text-stone-900 mb-2">2. Practice</h3>
+                    <p class="text-sm text-stone-600">Don't just read. Try online compilers like Replit or Programiz.
+                    </p>
+                </div>
+                <div class="p-6 rounded-xl bg-stone-50 border border-stone-200">
+                    <div class="text-2xl mb-3">📚</div>
+                    <h3 class="font-bold text-stone-900 mb-2">3. Learn</h3>
+                    <p class="text-sm text-stone-600">Watch YouTube tutorials or read the official documentation.</p>
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <blockquote class="text-xl italic text-stone-500">
+                    "The only way to learn a new programming language is by writing programs in it."
+                </blockquote>
+                <div class="mt-8">
+                    <span
+                        class="inline-block bg-stone-900 text-white px-6 py-2 rounded-full font-mono text-sm">print("Happy
+                        Coding!")</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-50 py-8 border-t border-stone-200">
+        <div class="text-center text-stone-500 text-sm">
+            Based on "Introduction to Python Programming" Presentation
+        </div>
+    </footer>
+
+
+</body>
+
+</html>

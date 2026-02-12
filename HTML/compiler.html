@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CodeSpark Academy - Python Web Compiler</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #000000;
+      --editor-bg: #f4f4f4;
+      --output-bg: #000000;
+      --output-text: #00ff00;
+      --button-bg: #007bff;
+      --button-text: #ffffff;
+    }
+
+    body.dark {
+      --bg: #121212;
+      --text: #ffffff;
+      --editor-bg: #1e1e1e;
+      --output-bg: #000000;
+      --output-text: #00ff00;
+      --button-bg: #00bcd4;
+      --button-text: #000000;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    header {
+      background: linear-gradient(135deg, #0d6efd, #00c6ff);
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    .container {
+      padding: 15px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    textarea {
+      width: 100%;
+      height: 250px;
+      padding: 10px;
+      font-family: Consolas, monospace;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      background-color: var(--editor-bg);
+      color: var(--text);
+      box-sizing: border-box;
+    }
+
+    .output {
+      margin-top: 10px;
+      width: 100%;
+      height: 160px;
+      background-color: var(--output-bg);
+      color: var(--output-text);
+      padding: 10px;
+      border-radius: 8px;
+      font-family: Consolas, monospace;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px;
+      font-size: 0.85rem;
+      color: gray;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    .file-label {
+      padding: 8px 14px;
+      border-radius: 6px;
+      background-color: var(--button-bg);
+      color: var(--button-text);
+      font-weight: bold;
+      cursor: pointer;
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+
+<header>🚀 CodeSpark Academy - Python Web Compiler</header>
+
+<div class="container">
+  <div class="controls">
+    <button onclick="runCode()">▶ Run</button>
+    <button onclick="saveCode()">💾 Save</button>
+    <button onclick="loadCode()">📂 Load</button>
+    <label class="file-label">
+      📁 Upload File
+      <input type="file" id="fileInput" accept=".py,.txt" onchange="uploadFile()">
+    </label>
+    <button onclick="toggleDarkMode()">🌙 / ☀️ Dark Mode</button>
+  </div>
+
+  <textarea id="codeEditor" placeholder="# Write your Python code here...
+print('Hello from CodeSpark Academy!')"></textarea>
+
+  <div class="output" id="output">Output will appear here...</div>
+</div>
+
+<footer>© 2026 CodeSpark Academy | Learn • Code • Build</footer>
+
+<script>
+  const editor = document.getElementById("codeEditor");
+  const output = document.getElementById("output");
+
+  // Simulated Python runner (browser cannot run real Python directly)
+  function runCode() {
+    output.textContent = "";
+    const code = editor.value;
+
+    try {
+      // Very basic simulation for print statements
+      const lines = code.split("\n");
+      lines.forEach(line => {
+        if (line.trim().startsWith("print(")) {
+          const content = line.match(/print\((.*)\)/);
+          if (content && content[1]) {
+            output.textContent += eval(content[1]) + "\n";
+          }
+        }
+      });
+
+      if (output.textContent.trim() === "") {
+        output.textContent = "⚠️ Only print() statements are supported in this browser version.\nUse a real Python backend for full execution.";
+      }
+
+    } catch (error) {
+      output.textContent = "Error: " + error;
+    }
+  }
+
+  // Save code to localStorage
+  function saveCode() {
+    localStorage.setItem("codespark_python_code", editor.value);
+    alert("Code saved successfully! (CodeSpark Academy)");
+  }
+
+  // Load code from localStorage
+  function loadCode() {
+    const savedCode = localStorage.getItem("codespark_python_code");
+    if (savedCode) {
+      editor.value = savedCode;
+      alert("Code loaded successfully! (CodeSpark Academy)");
+    } else {
+      alert("No saved code found.");
+    }
+  }
+
+  // Upload file and load into editor
+  function uploadFile() {
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      editor.value = e.target.result;
+      alert("File loaded into editor! (CodeSpark Academy)");
+    };
+    reader.readAsText(file);
+  }
+
+  // Toggle dark mode
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+  }
+
+  // Auto-load saved code on startup
+  window.onload = function() {
+    const savedCode = localStorage.getItem("codespark_python_code");
+    if (savedCode) {
+      editor.value = savedCode;
+    }
+  };
+</script>
+
+</body>
+</html>
